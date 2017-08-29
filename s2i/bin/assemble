@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "---> Installing Thermostat Web Gateway source ..."
+mv /tmp/src/* ./
+
+echo "---> Building Thermostat Web Gateway ..."
+mvn clean install
+if [ $? -ne 0 ]; then
+  echo "Build failed. Abort."
+  exit 1
+fi
+
+echo "---> Installing Thermostat Web Gateway in /opt/app-root/bin ..."
+cp -r distribution/target/image/* ${THERMOSTAT_GATEWAY_HOME}
+sed -i -e 's|com.redhat.thermostat.gateway.level=INFO|#com.redhat.thermostat.gateway.level=INFO|g' \
+       -e 's|#com.redhat.thermostat.gateway.level=WARNING|com.redhat.thermostat.gateway.level=WARNING|g' \
+    ${THERMOSTAT_GATEWAY_HOME}/etc/logging.properties
+ln -s ${THERMOSTAT_GATEWAY_HOME}/bin /opt/app-root/bin
+
+echo "---> Cleaning up sources ..."
+rm -rf ./*
+
+fix-permissions ${THERMOSTAT_GATEWAY_HOME}
+
+exit 0
