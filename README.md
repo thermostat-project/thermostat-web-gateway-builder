@@ -19,6 +19,7 @@ the Docker run command.
 |  `MONGO_PASSWORD`             | Password for the MongoDB database           |
 |  `TLS_ENABLED`                | Whether to encrypt communication with the web gateway using TLS (default value: "true") |
 |  `WEB_CLIENT_ENABLED`         | Whether to include an endpoint for the Thermostat web client (default value: "true") |
+|  `BASIC_AUTH_CONFIG`          | Path to configuration file for Basic authentication |
 |  `APP_USER`                   | The application user the Java app Thermostat shall monitor runs as (default value: "default") |
 
 Usage
@@ -35,3 +36,7 @@ image:
 Finally, run the built image while setting the required environment variables:
 
     $ docker run -e [...] -it icedtea/thermostat-web-gateway
+
+To include a custom configuration file, such as for Basic authentication configuration, you can include it as a volume when running the built image:
+
+    $ docker run -e BASIC_AUTH_CONFIG=/container/path/basic-config.properties -v /local/path/basic-config.properties:/container/path/basic-config.properties:ro,Z [...]

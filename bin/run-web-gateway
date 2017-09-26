@@ -120,6 +120,16 @@ function prepareConfig {
         exit 1
     fi
     setProperty "${globalConfigFile}" "WITH_WEB_CLIENT" "${WEB_CLIENT_ENABLED}"
+
+    # Check if a Basic Auth config file has been supplied
+    local basicAuthFile="${configDir}/basic-config.properties"
+    if [ -f "${BASIC_AUTH_CONFIG:-}" ]; then
+        ln -sf "${BASIC_AUTH_CONFIG}" "${basicAuthFile}"
+        if [ $? -ne 0 ]; then
+            echo "Failed to import basic auth config from ${BASIC_AUTH_CONFIG}" >&2
+            exit 1
+        fi
+    fi
 }
 
 prepareConfig

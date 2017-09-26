@@ -10,7 +10,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "---> Installing Thermostat Web Gateway in /opt/app-root/bin ..."
+echo "---> Installing Thermostat Web Gateway in ${THERMOSTAT_GATEWAY_HOME} ..."
 cp -r distribution/target/image/* ${THERMOSTAT_GATEWAY_HOME}
 sed -i -e 's|com.redhat.thermostat.gateway.level=INFO|#com.redhat.thermostat.gateway.level=INFO|g' \
        -e 's|#com.redhat.thermostat.gateway.level=WARNING|com.redhat.thermostat.gateway.level=WARNING|g' \
