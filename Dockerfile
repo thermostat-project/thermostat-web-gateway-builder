@@ -1,4 +1,4 @@
-FROM icedtea/openjdk-8-64bit-maven
+FROM icedtea/openjdk-8-32bit-maven
 
 # Thermostat Web Gateway Builder Image.
 # See README.md for environment variables required at runtime.
