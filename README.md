@@ -1,13 +1,14 @@
-Thermostat Web Gateway Builder Docker image
+Thermostat Web Gateway Builder (32-bit) Docker image
 =============================
 
 This repository contains a Dockerfile for a Thermostat Web Gateway Builder image, which in turn
-can be used to build a Thermostat Web Gateway image, call this image `icedtea/thermostat-web-gateway`.
+can be used to build a Thermostat Web Gateway image, call this image `icedtea/thermostat-web-gateway-32bit`.
+This image builds and runs using a 32-bit JVM.
 
 Environment variables
 ---------------------------------
 
-The icedtea/thermostat-web-gateway image recognizes the following environment
+The icedtea/thermostat-web-gateway-32bit image recognizes the following environment
 variables that you can set during initialization by passing `-e VAR=VALUE` to
 the Docker run command.
 
@@ -24,18 +25,18 @@ the Docker run command.
 
 Usage
 ---------------------------------
-First, you need to build this image, let's call it `icedtea/thermostat-web-gateway-builder`:
+First, you need to build this image, let's call it `icedtea/thermostat-web-gateway-32bit-builder`:
 
-    $ docker build -t icedtea/thermostat-web-gateway-builder .
+    $ docker build -t icedtea/thermostat-web-gateway-32bit-builder .
 
-Next, build a Thermostat Web Gateway version into `icedtea/thermostat-web-gateway` using the builder
+Next, build a Thermostat Web Gateway version into `icedtea/thermostat-web-gateway-32bit` using the builder
 image:
 
-    $ s2i build http://icedtea.classpath.org/mirror/git/thermostat-ng-web-gateway icedtea/thermostat-web-gateway-builder icedtea/thermostat-web-gateway
+    $ s2i build http://icedtea.classpath.org/mirror/git/thermostat-ng-web-gateway icedtea/thermostat-web-gateway-32bit-builder icedtea/thermostat-web-gateway-32bit
 
 Finally, run the built image while setting the required environment variables:
 
-    $ docker run -e [...] -it icedtea/thermostat-web-gateway
+    $ docker run -e [...] -it icedtea/thermostat-web-gateway-32bit
 
 To include a custom configuration file, such as for Basic authentication configuration, you can include it as a volume when running the built image:
 
