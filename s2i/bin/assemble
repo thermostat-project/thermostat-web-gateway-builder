@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo "---> Installing Thermostat Web Gateway source ..."
+mkdir -p "${THERMOSTAT_BUILD_DIR}"
+pushd "${THERMOSTAT_BUILD_DIR}" >/dev/null
 mv /tmp/src/* ./
 
 echo "---> Building Thermostat Web Gateway ..."
@@ -18,7 +20,8 @@ sed -i -e 's|com.redhat.thermostat.gateway.level=INFO|#com.redhat.thermostat.gat
 ln -s ${THERMOSTAT_GATEWAY_HOME}/bin /opt/app-root/bin
 
 echo "---> Cleaning up sources ..."
-rm -rf ./*
+popd >/dev/null
+rm -rf ./* ./.[!.]*
 
 fix-permissions ${THERMOSTAT_GATEWAY_HOME}
 

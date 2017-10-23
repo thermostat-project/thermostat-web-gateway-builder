@@ -29,6 +29,9 @@ WORKDIR ${HOME}
 # Install s2i build scripts
 COPY ./s2i/bin/ ${STI_SCRIPTS_PATH}
 
+# Use a dedicated subdirectory for builds to avoid conflict with m2 cache
+ENV THERMOSTAT_BUILD_DIR="${HOME}/thermostat-build"
+
 # Ensure any UID can read/write to files in /opt/app-root
 RUN chown -R ${APP_USER}:0 /opt/app-root && \
     find /opt/app-root -type d -exec chmod g+rwx '{}' \; && \
